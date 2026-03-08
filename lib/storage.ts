@@ -86,6 +86,10 @@ export function getQuotesByUser(vaName: string): QuoteResult[] {
   return getQuotes().filter((q) => q.vaName === vaName)
 }
 
+export function getAllQuotes(): QuoteResult[] {
+  return getQuotes()
+}
+
 export function saveQuote(quote: QuoteResult): void {
   const quotes = getQuotes()
   quotes.unshift(quote)
