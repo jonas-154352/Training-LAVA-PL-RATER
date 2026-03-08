@@ -60,7 +60,7 @@ function DashboardContent() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
 
-        <Link href="/quote/auto" className="group">
+        <Link href="/pre-quote?type=auto" className="group">
           <Card className="h-full transition-all hover:shadow-lg hover:border-primary/30 cursor-pointer">
             <CardContent className="flex items-center gap-4 p-6">
 
@@ -71,7 +71,7 @@ function DashboardContent() {
               <div>
                 <CardTitle className="text-lg">New Auto Quote</CardTitle>
                 <CardDescription className="mt-1">
-                  5-step auto insurance quoting wizard with VIN lookup
+                  Multi-vehicle auto insurance quoting with driver info
                 </CardDescription>
               </div>
 
@@ -79,7 +79,7 @@ function DashboardContent() {
           </Card>
         </Link>
 
-        <Link href="/quote/homeowners" className="group">
+        <Link href="/pre-quote?type=homeowners" className="group">
           <Card className="h-full transition-all hover:shadow-lg hover:border-primary/30 cursor-pointer">
             <CardContent className="flex items-center gap-4 p-6">
 
@@ -90,7 +90,7 @@ function DashboardContent() {
               <div>
                 <CardTitle className="text-lg">New Homeowners Quote</CardTitle>
                 <CardDescription className="mt-1">
-                  4-step homeowners / renters / condo quoting wizard
+                  Homeowners / renters / condo quoting wizard
                 </CardDescription>
               </div>
 

@@ -4,6 +4,8 @@
 
 // --- Personal Info ---
 export interface PersonalInfo {
+  firstName: string
+  lastName: string
   fullName: string
   dateOfBirth: string
   gender: "male" | "female" | "non-binary" | ""
@@ -12,19 +14,31 @@ export interface PersonalInfo {
   city: string
   state: string
   zip: string
+  county: string
   email: string
   phone: string
+  yearsAtAddress: string
+  ownership: "own" | "rent" | ""
+  currentCarrier: string
+  currentPremium: string
+  policyExpiration: string
+  priorCoverage: string
+  coverageLapses: boolean
 }
 
 // --- Vehicle Info ---
 export interface VehicleInfo {
+  id: string
   vin: string
   year: string
   make: string
   model: string
+  trim: string
   bodyType: string
   primaryUse: "commute" | "pleasure" | "business" | ""
   annualMileage: string
+  oneWayMilesToWork: string
+  daysDrivenPerWeek: string
   garagingSameAsPersonal: boolean
   garagingStreet: string
   garagingCity: string
@@ -32,6 +46,11 @@ export interface VehicleInfo {
   garagingZip: string
   antiTheft: boolean
   ownership: "owned" | "financed" | "leased" | ""
+  lienholder: string
+  compDeductible: "250" | "500" | "1000" | "2000" | "none" | ""
+  collisionDeductible: "250" | "500" | "1000" | "2000" | "none" | ""
+  rentalReimbursement: boolean
+  roadsideAssistance: boolean
 }
 
 // --- Driving History ---
@@ -47,15 +66,20 @@ export interface DrivingHistory {
 
 // --- Auto Coverage ---
 export interface AutoCoverage {
+  bodilyInjuryLimit: "25/50" | "50/100" | "100/300" | "250/500" | ""
+  propertyDamageLimit: "25" | "50" | "100" | "250" | ""
   liabilityLimit: "25/50" | "50/100" | "100/300" | "250/500" | ""
-  compDeductible: "250" | "500" | "1000" | "2000" | ""
-  collisionDeductible: "250" | "500" | "1000" | "2000" | ""
+  compDeductible: "250" | "500" | "1000" | "2000" | "none" | ""
+  collisionDeductible: "250" | "500" | "1000" | "2000" | "none" | ""
+  pip: "none" | "2500" | "5000" | "10000" | ""
+  medicalPayments: "none" | "1000" | "5000" | "10000" | "25000" | ""
+  umUimCoverage: "none" | "state_min" | "standard" | ""
   uninsuredMotorist: boolean
   uninsuredLimit: "25/50" | "50/100" | "100/300" | ""
-  medicalPayments: "1000" | "5000" | "10000" | "25000" | ""
   rentalReimbursement: boolean
   rentalDailyLimit: "30" | "50" | "75" | ""
   roadsideAssistance: boolean
+  gapCoverage: boolean
 }
 
 // --- Auto Discounts ---
@@ -64,28 +88,40 @@ export interface AutoDiscounts {
   homeownerBundle: boolean
   goodDriver: boolean
   safetyDevice: boolean
+  dynamicDrive: boolean
 }
 
 // --- Full Auto Quote Input ---
 export interface AutoQuoteInput {
   personalInfo: PersonalInfo
-  vehicleInfo: VehicleInfo
+  vehicles: VehicleInfo[]
+  drivers: DriverInfo[]
   drivingHistory: DrivingHistory
   coverage: AutoCoverage
   discounts: AutoDiscounts
+  paymentPlan: "full" | "2pay" | "4pay" | "monthly" | ""
 }
 
 // --- Homeowners Property Info ---
 export interface PropertyInfo {
   policyType: "HO3" | "HO4" | "HO6" | ""
+  propertyType: "single_family" | "condo" | "townhouse" | ""
   yearBuilt: string
+  yearRoofUpdated: string
   squareFootage: string
   stories: string
-  roofType: "asphalt" | "tile" | "metal" | "slate" | ""
+  roofShape: "hip" | "gable" | "flat" | "shed" | "other" | ""
+  roofType: "asphalt" | "tile" | "metal" | "wood" | "slate" | ""
   roofAge: string
   constructionType: "frame" | "masonry" | "steel" | ""
   foundation: "slab" | "basement" | "crawlspace" | ""
+  bedrooms: string
+  bathrooms: string
+  heatingType: "central" | "electric" | "gas" | "oil" | "none" | ""
+  coolingType: "central" | "window" | "none" | ""
+  fireAlarm: boolean
   securitySystem: boolean
+  deadbolts: boolean
   swimmingPool: boolean
   trampoline: boolean
   distanceToFireDept: string
@@ -100,6 +136,7 @@ export interface HomeownersCoverageOptions {
   lossOfUse: string
   liability: "100000" | "300000" | "500000" | ""
   medicalPayments: "1000" | "5000" | "10000" | ""
+  deductible: "500" | "1000" | "2500" | "5000" | ""
 }
 
 // --- Homeowners Claims ---
@@ -107,6 +144,9 @@ export interface HomeownersClaims {
   numberOfClaims: string
   claimTypes: string[]
   priorCarrier: string
+  policyExpiration: string
+  claimsLast5Years: string
+  priorCoverageDuration: string
 }
 
 // --- Homeowners Discounts ---
@@ -172,9 +212,42 @@ export interface QuoteResult {
 // --- VA User ---
 export interface VAUser {
   name: string
+  email: string
   loginCount: number
   lastLogin: string
   createdAt: string
+}
+
+// --- Pre-Quote Form ---
+export interface PreQuoteForm {
+  id: string
+  vaName: string
+  date: string
+  trainerName: string
+  teamLeaderName: string
+  createdAt: string
+}
+
+// --- Driver Info (for Auto) ---
+export interface DriverInfo {
+  id: string
+  firstName: string
+  lastName: string
+  dateOfBirth: string
+  gender: "male" | "female" | "non-binary" | ""
+  maritalStatus: "single" | "married" | "divorced" | "widowed" | ""
+  occupation: string
+  relationshipToInsured: "self" | "spouse" | "child" | "other" | ""
+  licenseNumber: string
+  licenseState: string
+  ageFirstLicensed: string
+  licenseStatus: "valid" | "suspended" | "revoked" | "permit" | ""
+  ticketsLast3Years: string
+  accidentsLast5Years: string
+  sr22Required: boolean
+  goodStudent: boolean
+  driversEducation: boolean
+  awayAtSchool: boolean
 }
 
 // --- US States ---
